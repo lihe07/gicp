@@ -1,0 +1,13 @@
+[package]
+name = "backend"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+include_dir = "0.7.3"
+mime_guess = "2.0.4"
+salvo = "0.37.9"
+sqlx = { version = "0.6.2", features = ["runtime-tokio-native-tls", "sqlite"] }
+tokio = { version = "1.24.2", features = ["macros"] }

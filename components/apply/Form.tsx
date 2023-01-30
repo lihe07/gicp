@@ -1,4 +1,4 @@
-import { Button, Card, Box, CardBody, CardHeader, FormControl, FormHelperText, FormLabel, Heading, Input, Text, InputGroup, InputLeftAddon, Textarea, FormErrorMessage } from "@chakra-ui/react";
+import { Button, Card, Box, CardBody, CardHeader, FormControl, FormHelperText, FormLabel, Heading, Input, Text, InputGroup, InputLeftAddon, Textarea, FormErrorMessage, useToast } from "@chakra-ui/react";
 import { Formik, FormikHelpers, Field } from "formik";
 import { Form as FormikForm } from 'formik'
 
@@ -32,6 +32,10 @@ function validateDomain(value: string) {
 
 }
 
+function validateHref(value: string) {
+
+}
+
 
 function validatePhone(value: string) {
     if (value) {
@@ -41,12 +45,7 @@ function validatePhone(value: string) {
 }
 
 
-function onSubmit(values: Form, actions: FormikHelpers<Form>) {
-    setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
-        actions.setSubmitting(false)
-    }, 1000)
-}
+
 
 interface FieldProps {
     name: string,
@@ -78,7 +77,44 @@ function QuickField(props: FieldProps) {
 }
 
 export default function Form() {
+    const toast = useToast()
 
+    function onSubmit(values: Form, actions: FormikHelpers<Form>) {
+        const payload = {
+            ...values,
+            id: -1,
+            approved: false
+        }
+        const api = "/api/list"
+        fetch(api, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        }).then(res => {
+            console.log(res);
+            actions.setSubmitting(false)
+            if (res.status == 200) {
+                actions.resetForm()
+                toast({
+                    title: "提交成功",
+                    description: "您的申请已提交，我们会尽快处理",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            } else {
+                toast({
+                    title: "提交失败",
+                    description: "请检查网络连接",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            }
+        })
+    }
 
     return (
         <>
@@ -98,7 +134,9 @@ export default function Form() {
                                         <FormControl mt="5" isInvalid={form.errors.phone && form.touched.phone}>
                                             <FormLabel>电话</FormLabel>
                                             <InputGroup>
-                                                <InputLeftAddon children="+86"></InputLeftAddon>
+                                                <InputLeftAddon>
+                                                    +86
+                                                </InputLeftAddon>
                                                 <Input placeholder="12312341234" type="tel" {...field}></Input>
                                             </InputGroup>
                                             <FormHelperText>
@@ -122,13 +160,7 @@ export default function Form() {
 
                                 <QuickField name="domain" label="域名" validate={validateDomain} helper="您网站的域名，无需包含子域（如www前缀）" placeholder="example.com" type="text" />
 
-                                <FormControl mt="5" isRequired>
-                                    <FormLabel>首页链接</FormLabel>
-                                    <Input placeholder="https://www.example.com" type="text"></Input>
-                                    <FormHelperText>
-                                        您网站首页的链接，请包含具体协议（如 <code>https://</code> 前缀）
-                                    </FormHelperText>
-                                </FormControl>
+                                <QuickField name="href" label="首页链接" validate={validateHref} helper={<span>您希望在我们网站上展示的链接，请包含具体协议（如 <code>https://</code> 前缀）</span>} placeholder="https://www.example.com/" type="text" mt="5" />
 
                             </CardBody>
                         </Card>
@@ -139,13 +171,26 @@ export default function Form() {
                                 <Heading size="md">备注</Heading>
                             </CardHeader>
                             <CardBody>
-                                <FormControl>
+                                {/* <FormControl>
                                     <FormLabel>备注文本</FormLabel>
                                     <Textarea></Textarea>
                                     <FormHelperText>
                                         如果您有其他内容需要备注，请在这里填写，此字段会公开展示
                                     </FormHelperText>
-                                </FormControl>
+                                </FormControl> */}
+
+                                <Field name="note">
+                                    {({ field }: any) => (
+                                        <FormControl>
+                                            <FormLabel>备注文本</FormLabel>
+                                            <Textarea {...field}></Textarea>
+                                            <FormHelperText>
+                                                如果您有其他内容需要备注，请在这里填写，此字段会公开展示
+                                            </FormHelperText>
+                                        </FormControl>
+                                    )}
+                                </Field>
+
                             </CardBody>
 
                         </Card>

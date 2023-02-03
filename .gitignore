@@ -37,3 +37,5 @@ next-env.d.ts
 
 # rust
 /backend/target/
+config.toml
+data.db

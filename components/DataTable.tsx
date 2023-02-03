@@ -13,7 +13,7 @@ import {
   Icon,
   Editable,
   EditableInput,
-  EditablePreview
+  EditablePreview,
 } from "@chakra-ui/react";
 
 import { useEffect, useState } from "react";
@@ -26,6 +26,8 @@ import {
   CheckCircleIcon,
   QuestionIcon,
 } from "@chakra-ui/icons";
+
+import NextLink from 'next/link'
 
 interface Item {
   name: string;
@@ -140,9 +142,9 @@ export default function DataTable(props: DataTableProps) {
               {props.isAdmin && (
                 <>
                   <Th>邮箱及手机号</Th>
-                  <Th>操作</Th>
                 </>
               )}
+              <Th>操作</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -172,8 +174,16 @@ export default function DataTable(props: DataTableProps) {
                     <Th>
                       {item.email} {item.phone}
                     </Th>
-                    <Th>
-                      <ButtonGroup size="sm">
+                  </>
+                )}
+
+                <Th>
+                  <ButtonGroup size="sm">
+                    {!props.isAdmin && (
+                      <Button as={NextLink} href={`/id/${item.id}`} colorScheme="blue" > 查看 </Button>
+                    )}
+                    {props.isAdmin && (
+                      <>
                         {item.approved ? (
                           <Button
                             colorScheme="yellow"
@@ -199,10 +209,10 @@ export default function DataTable(props: DataTableProps) {
                         >
                           删除
                         </Button>
-                      </ButtonGroup>
-                    </Th>
-                  </>
-                )}
+                      </>
+                    )}
+                  </ButtonGroup>
+                </Th>
               </Tr>
             ))}
           </Tbody>

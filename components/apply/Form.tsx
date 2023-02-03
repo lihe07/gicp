@@ -96,7 +96,7 @@ export default function Form() {
             console.log(res);
             actions.setSubmitting(false)
             if (res.status == 200) {
-                // actions.resetForm()
+                actions.resetForm()
                 toast({
                     title: "提交成功",
                     description: "您的申请已提交，我们会尽快处理",

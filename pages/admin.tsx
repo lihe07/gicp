@@ -28,9 +28,13 @@ export default function Admin() {
                     // Clear cookie
                     document.cookie = ""
                 }
+                setLoading(false);
+            }).catch(() => {
+                setLoading(false);
             })
+        } else {
+            setLoading(false);
         }
-        setLoading(false);
 
     }, [])
 

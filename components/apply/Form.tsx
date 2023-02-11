@@ -128,27 +128,6 @@ export default function Form() {
                             <CardBody>
                                 <QuickField name="name" label="姓名" validate={validateName} helper="我们如何称呼您？（此字段不会公开展示）" type="text" placeholder="张三" />
                                 <QuickField name="email" label="邮箱" validate={validateEmail} helper="您的联系邮箱，请确保真实有效，此字段不会公开展示" type="email" placeholder="me@example.com" mt="5" />
-
-                                <Field name="phone" validate={validatePhone}>
-                                    {({ field, form }: any) => (
-                                        <FormControl mt="5" isInvalid={form.errors.phone && form.touched.phone}>
-                                            <FormLabel>电话</FormLabel>
-                                            <InputGroup>
-                                                <InputLeftAddon>
-                                                    +86
-                                                </InputLeftAddon>
-                                                <Input placeholder="12312341234" type="tel" {...field}></Input>
-                                            </InputGroup>
-                                            <FormHelperText>
-                                                您的手机号码，此字段不会公开展示
-                                            </FormHelperText>
-                                            <FormErrorMessage>
-                                                {form.errors.phone}
-                                            </FormErrorMessage>
-                                        </FormControl>
-                                    )}
-                                </Field>
-
                             </CardBody>
                         </Card>
 
@@ -168,24 +147,24 @@ export default function Form() {
 
                         <Card mt="10">
                             <CardHeader>
-                                <Heading size="md">备注</Heading>
+                                <Heading size="md">介绍</Heading>
                             </CardHeader>
                             <CardBody>
                                 {/* <FormControl>
-                                    <FormLabel>备注文本</FormLabel>
+                                    <FormLabel>介绍文本</FormLabel>
                                     <Textarea></Textarea>
                                     <FormHelperText>
-                                        如果您有其他内容需要备注，请在这里填写，此字段会公开展示
+                                        如果您有其他内容需要介绍，请在这里填写，此字段会公开展示
                                     </FormHelperText>
                                 </FormControl> */}
 
                                 <Field name="note">
                                     {({ field }: any) => (
                                         <FormControl>
-                                            <FormLabel>备注文本</FormLabel>
+                                            <FormLabel>简单介绍</FormLabel>
                                             <Textarea {...field}></Textarea>
                                             <FormHelperText>
-                                                如果您有其他内容需要备注，请在这里填写，此字段会公开展示
+                                                请您简单介绍一下您的网站，比如网站的功能、作用、来历……帮我们更好了解您。
                                             </FormHelperText>
                                         </FormControl>
                                     )}

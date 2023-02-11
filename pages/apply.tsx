@@ -9,7 +9,8 @@ export default function Apply() {
         </Head>
         <main className="max-width">
             <Heading mt="10">申请 GICP ID</Heading>
-            <Text mt="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut dolorem ratione cumque totam tempora, molestiae obcaecati natus nisi delectus, dolores quidem reiciendis? Reiciendis neque dignissimos omnis perspiciatis molestiae quae nam!</Text>
+            <Text mt="3">您只需填写相关信息，审核通过后不到24小时就会收到我们的邮件通知！
+                <br></br>You only need to fill in the relevant information, and you will receive our email notification after less than 24 hours of review!</Text>
 
             <Form></Form>
         </main>

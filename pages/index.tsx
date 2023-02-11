@@ -19,7 +19,7 @@ export default function Home() {
           <AlertIcon></AlertIcon>
           <AlertDescription color="orange.500">
             提示:
-            Because it is the initial stage of the project, there are many areas that need to be improved. If you have any comments or suggestions, please contact QQ: 1733856867, or email tkong@tkong.net          </AlertDescription>
+            Because it is the initial stage of the project, there are many areas that need to be improved. If you have any comments or suggestions, please contact email tkong@tkong.net          </AlertDescription>
         </Alert>
 
         <Heading mt="10" size="lg">介绍</Heading>

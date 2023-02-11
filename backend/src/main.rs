@@ -1,9 +1,9 @@
-use salvo::prelude::*;
 use log::{error, info};
+use salvo::prelude::*;
 
-mod handlers;
-mod fs;
 mod config;
+mod fs;
+mod handlers;
 
 use once_cell::sync::OnceCell;
 use salvo::cors::Cors;
@@ -15,18 +15,21 @@ static DB: OnceCell<DbPool> = OnceCell::new();
 
 async fn ensure_table() {
     info!("Creating table if not exists...");
-    sqlx::query("CREATE TABLE IF NOT EXISTS items (
+    sqlx::query(
+        "CREATE TABLE IF NOT EXISTS items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        phone TEXT,
         domain TEXT NOT NULL,
         href TEXT NOT NULL,
         note TEXT,
         approved INTEGER NOT NULL DEFAULT 0
-    )").execute(DB.get().unwrap()).await.unwrap();
+    )",
+    )
+    .execute(DB.get().unwrap())
+    .await
+    .unwrap();
 }
-
 
 #[tokio::main]
 async fn main() {

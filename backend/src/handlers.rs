@@ -76,7 +76,7 @@ struct Item {
     id: i64,
     name: String,
     email: String,
-    phone: Option<String>,
+    // phone: Option<String>,
     domain: String,
     href: String,
     note: Option<String>,
@@ -114,7 +114,7 @@ async fn list(req: &mut Request, res: &mut Response) {
     if !auth {
         // Clear the phone number
         for item in items.iter_mut() {
-            item.phone = None;
+            // item.phone = None;
             item.email = "******".to_string();
         }
     }
@@ -160,12 +160,12 @@ async fn create(req: &mut Request, res: &mut Response) {
     let id = max_id + 1;
     // Insert into database
     sqlx::query(
-        "INSERT INTO items (id, name, email, phone, domain, href, note) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO items (id, name, email, domain, href, note) VALUES (?, ?, ?, ?, ?, ?, ?)",
     )
     .bind(id)
     .bind(&item.name)
     .bind(&item.email)
-    .bind(&item.phone)
+    // .bind(&item.phone)
     .bind(&item.domain)
     .bind(&item.href)
     .bind(&item.note)
@@ -222,7 +222,7 @@ async fn get(req: &mut Request, res: &mut Response) {
         .unwrap();
 
     if !check_auth(req.header("Authorization").unwrap_or("")) {
-        item.phone = None;
+        // item.phone = None;
         item.email = "******".to_string();
     }
     res.render(Json(item));
@@ -248,10 +248,10 @@ async fn update(req: &mut Request, res: &mut Response) {
     let item = item.unwrap();
 
     let conn = crate::DB.get().unwrap();
-    sqlx::query("UPDATE items SET name = ?, email = ?, phone = ?, domain = ?, href = ?, note = ? WHERE id = ?")
+    sqlx::query("UPDATE items SET name = ?, email = ?, domain = ?, href = ?, note = ? WHERE id = ?")
         .bind(&item.name)
         .bind(&item.email)
-        .bind(&item.phone)
+        // .bind(&item.phone)
         .bind(&item.domain)
         .bind(&item.href)
         .bind(&item.note)

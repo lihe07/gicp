@@ -1,6 +1,5 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { Card, Heading, TableContainer, Table, Tbody, Tr, Td, Link } from '@chakra-ui/react';
+import { Card, Code, Heading, TableContainer, Table, Tbody, Tr, Td, Link, Text } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
@@ -46,8 +45,11 @@ export default function SitePage() {
                             </Tbody>
                         </Table>
                     </TableContainer>
+                    <Text my="3" mx="6">添加到您的网站：「<Code fontFamily="sans-serif">
+                        {`<a href="https://www.icp.gay/id/%ID%" target="_blank">GayICP备%ID%号</a>`}
+                        </Code>」</Text>
+
                 </Card>
-                <text>添加到您的网站：「<a href="https://www.icp.gay/?keyword=%ID%" target="_blank">Gay备%ID%号</a>」</text>
             </main>
         </>
     )

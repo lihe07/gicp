@@ -36,7 +36,6 @@ interface Item {
   id: string;
   note: string;
   email: string;
-  phone: string;
   approved: boolean;
 }
 
@@ -141,7 +140,7 @@ export default function DataTable(props: DataTableProps) {
               <Th>介绍</Th>
               {props.isAdmin && (
                 <>
-                  <Th>邮箱及手机号</Th>
+                  <Th>邮箱</Th>
                 </>
               )}
               <Th>操作</Th>
@@ -172,7 +171,7 @@ export default function DataTable(props: DataTableProps) {
                 {props.isAdmin && (
                   <>
                     <Th>
-                      {item.email} {item.phone}
+                      {item.email}
                     </Th>
                   </>
                 )}

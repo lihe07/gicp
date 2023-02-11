@@ -138,7 +138,7 @@ export default function DataTable(props: DataTableProps) {
               <Th>域名</Th>
               <Th>首页链接</Th>
               <Th>备案号</Th>
-              <Th>备注</Th>
+              <Th>介绍</Th>
               {props.isAdmin && (
                 <>
                   <Th>邮箱及手机号</Th>

@@ -35,10 +35,10 @@ export default function SitePage() {
                                 </Tr>
                                 <Tr>
                                     <Td>备案号</Td>
-                                    <Td>%ID%</Td>
+                                    <Td>GiCP-%ID%</Td>
                                 </Tr>
                                 <Tr>
-                                    <Td>备注</Td>
+                                    <Td>介绍</Td>
                                     <Td>
                                         %NOTE%
                                     </Td>
@@ -47,6 +47,7 @@ export default function SitePage() {
                         </Table>
                     </TableContainer>
                 </Card>
+                <text>添加到您的网站：「<a href="https://www.icp.gay/?keyword=%ID%" target="_blank">Gay备%ID%号</a>」</text>
             </main>
         </>
     )

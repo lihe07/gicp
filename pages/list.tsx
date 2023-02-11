@@ -11,7 +11,7 @@ export default function List() {
         </Head>
         <main className="max-width">
             <Heading mt="10">列表</Heading>
-            <Text mt="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut dolorem ratione cumque totam tempora, molestiae obcaecati natus nisi delectus, dolores quidem reiciendis? Reiciendis neque dignissimos omnis perspiciatis molestiae quae nam!</Text>
+            <Text mt="3"> </Text>
 
             <DataTable isAdmin={false}></DataTable>
         </main>

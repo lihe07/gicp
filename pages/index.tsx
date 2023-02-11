@@ -12,21 +12,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="max-width">
-        <Heading textAlign="center" size="2xl" fontWeight="light">GICP</Heading>
+        <Heading textAlign="center" size="2xl" fontWeight="black">GICP</Heading>
         <Heading textAlign="center" size="lg">Welcome to GICP</Heading>
 
         <Alert status='warning' mt="10">
           <AlertIcon></AlertIcon>
           <AlertDescription color="orange.500">
             提示:
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis id vitae unde
-          </AlertDescription>
+            Because it is the initial stage of the project, there are many areas that need to be improved. If you have any comments or suggestions, please contact QQ: 1733856867, or email tkong@tkong.net          </AlertDescription>
         </Alert>
 
         <Heading mt="10" size="lg">介绍</Heading>
         <Text mt="3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident vitae pariatur explicabo, ex tempora laborum harum, impedit non quos commodi veniam dolore sapiente. Harum impedit dolorem facere temporibus quo nobis?
-        </Text>
+          Gay iCP is a way to help 🏳️‍🌈 LGBTQ+ groups to express their identity and be proud of it. We refer to the operation mode and design of China iCP registration and Meo iCP, and made such a project. You are welcome to use it. Sorry for possibly embedding ads in pages as we dont make any money!        </Text>
         <style jsx>{`
           main {
             padding-top: 60px;

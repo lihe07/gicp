@@ -160,7 +160,7 @@ async fn create(req: &mut Request, res: &mut Response) {
     let id = max_id + 1;
     // Insert into database
     sqlx::query(
-        "INSERT INTO items (id, name, email, domain, href, note) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO items (id, name, email, domain, href, note) VALUES (?, ?, ?, ?, ?, ?)",
     )
     .bind(id)
     .bind(&item.name)
@@ -248,17 +248,19 @@ async fn update(req: &mut Request, res: &mut Response) {
     let item = item.unwrap();
 
     let conn = crate::DB.get().unwrap();
-    sqlx::query("UPDATE items SET name = ?, email = ?, domain = ?, href = ?, note = ? WHERE id = ?")
-        .bind(&item.name)
-        .bind(&item.email)
-        // .bind(&item.phone)
-        .bind(&item.domain)
-        .bind(&item.href)
-        .bind(&item.note)
-        .bind(id)
-        .execute(conn)
-        .await
-        .unwrap();
+    sqlx::query(
+        "UPDATE items SET name = ?, email = ?, domain = ?, href = ?, note = ? WHERE id = ?",
+    )
+    .bind(&item.name)
+    .bind(&item.email)
+    // .bind(&item.phone)
+    .bind(&item.domain)
+    .bind(&item.href)
+    .bind(&item.note)
+    .bind(id)
+    .execute(conn)
+    .await
+    .unwrap();
     res.render(Text::Html("OK"));
 }
 

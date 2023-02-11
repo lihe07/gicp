@@ -27,7 +27,7 @@ import {
   QuestionIcon,
 } from "@chakra-ui/icons";
 
-import NextLink from 'next/link'
+import NextLink from "next/link";
 
 interface Item {
   name: string;
@@ -128,7 +128,7 @@ export default function DataTable(props: DataTableProps) {
 
   return (
     <Card mt="10" p="3">
-      <Skeleton isLoaded={isLoaded}>
+      <Skeleton isLoaded={isLoaded} maxW="100%" overflowX="auto">
         <Table>
           <Thead>
             <Tr>
@@ -170,16 +170,21 @@ export default function DataTable(props: DataTableProps) {
                 <Th>{item.note.length ? item.note : "无"}</Th>
                 {props.isAdmin && (
                   <>
-                    <Th>
-                      {item.email}
-                    </Th>
+                    <Th>{item.email}</Th>
                   </>
                 )}
 
                 <Th>
                   <ButtonGroup size="sm">
                     {!props.isAdmin && (
-                      <Button as={NextLink} href={`/id/${item.id}`} colorScheme="blue" > 查看 </Button>
+                      <Button
+                        as={NextLink}
+                        href={`/id/${item.id}`}
+                        colorScheme="blue"
+                      >
+                        {" "}
+                        查看{" "}
+                      </Button>
                     )}
                     {props.isAdmin && (
                       <>

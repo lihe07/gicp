@@ -79,10 +79,16 @@ pub fn site_info(item: TokenStream) -> TokenStream {
     // Get item name
     let item_name = item.to_string();
     // Read ../out/id/[id].html
-    let mut file = std::fs::File::open("../out/id/[id].html").unwrap();
+    let mut file = std::fs::File::open("../out/id/1.html").unwrap();
     let mut contents = String::new();
 
     file.read_to_string(&mut contents).unwrap();
+
+    let re = regex::Regex::new(r#"src="/_next/static/chunks/pages/id/1-[\w\d]+.js""#).unwrap();
+
+    contents = re
+        .replace(&contents, r#"src="/_next/static/chunks/pages/id/%ID%""#)
+        .to_string();
 
     let code = gen_code(contents, item_name);
     // Return code

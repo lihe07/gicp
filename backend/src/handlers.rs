@@ -155,7 +155,7 @@ async fn create(req: &mut Request, res: &mut Response) {
         .fetch_one(conn)
         .await
         .unwrap_or(None)
-        .unwrap_or((now + "00000").parse::<i64>().unwrap());
+        .unwrap_or((now + "0000").parse::<i64>().unwrap());
 
     let id = max_id + 1;
     // Insert into database
@@ -309,10 +309,11 @@ async fn site_info_html(req: &mut Request, res: &mut Response) {
 
 #[handler]
 async fn site_info_js(req: &mut Request, res: &mut Response) {
-    let referrer = req.header("referer").unwrap_or("");
-    // Get id from referrer
-    let id = referrer.split("/id/").last().unwrap_or("").parse::<i64>();
-    if id.is_err() {
+    // let referrer = req.header("referer").unwrap_or("");
+    // // Get id from referrer
+    // let id = referrer.split("/id/").last().unwrap_or("").parse::<i64>();
+    let id = req.param::<i64>("id");
+    if id.is_none() {
         not_found(res);
         return;
     }
@@ -331,7 +332,7 @@ async fn site_info_js(req: &mut Request, res: &mut Response) {
     let item = item.unwrap();
 
     let rendered = macros::site_info_js!(item);
-    res.render(Text::Html(rendered));
+    res.render(Text::Js(rendered));
 }
 
 pub fn make_router() -> Router {
@@ -348,7 +349,7 @@ pub fn make_router() -> Router {
                 .delete(delete)
                 .put(update),
         )
-        .push(Router::with_path("/_next/static/chunks/pages/id/<file>").get(site_info_js))
+        .push(Router::with_path("/_next/static/chunks/pages/id/<id>").get(site_info_js))
         .push(
             Router::with_path("/<**path>")
                 .get(get_static)
